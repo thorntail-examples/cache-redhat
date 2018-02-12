@@ -17,36 +17,20 @@
  */
 package org.wildfly.swarm.cachebooster;
 
-import org.jboss.logging.Logger;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 /**
  * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
  * <br>
- * Date: 1/31/18
+ * Date: 2/12/18
  */
-@Path("/name")
-@Produces("application/json")
-public class NameResource {
-
-    private static final Logger log = Logger.getLogger(NameResource.class);
+@Path("/alive")
+public class AliveEndpoint {
 
     @GET
-    public NameDto getName() {
-        log.info("generating the name");
-        performSlowOperation();
-        return new NameDto(UserNameGenerator.generate());
+    public Response isAlive() {
+        return Response.ok().build();
     }
-
-    private void performSlowOperation() {
-        try {
-            Thread.sleep(2000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
