@@ -1,0 +1,15 @@
+nameService:
+  url: "http://wfswarm-cache-name:8080/api"
+infinispan:
+  host: cache-server
+  port: 11222
+---
+project:
+  stage: local
+nameService:
+  url: "http://localhost:8280/api"
+  port:
+    offset: 100
+infinispan:
+  host: 127.0.0.1
+  port: 11222

@@ -1,0 +1,7 @@
+---
+project:
+  stage: local
+
+swarm:
+  port:
+    offset: 200
