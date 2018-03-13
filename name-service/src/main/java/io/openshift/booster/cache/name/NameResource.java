@@ -44,8 +44,7 @@ public class NameResource {
     private void performSlowOperation() {
         try {
             Thread.sleep(2000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ignored) {
         }
     }
 

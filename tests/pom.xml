@@ -23,9 +23,7 @@
 
   <name>WildFly Swarm - Cache - Tests</name>
 
-
   <dependencies>
-
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -48,11 +46,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.jboss.arquillian.junit</groupId>
-      <artifactId>arquillian-junit-container</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>org.arquillian.cube</groupId>
       <artifactId>arquillian-cube-openshift</artifactId>
       <scope>test</scope>
@@ -62,6 +55,18 @@
           <artifactId>undertow-core</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${version.restassured}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>arquillian</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

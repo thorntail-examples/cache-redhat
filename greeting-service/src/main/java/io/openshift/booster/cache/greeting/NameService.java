@@ -33,7 +33,7 @@ import javax.ws.rs.client.WebTarget;
 public class NameService {
 
     @Inject
-    @ConfigurationValue("nameService.url")
+    @ConfigurationValue("name-service.url")
     private String nameServiceUrl;
 
     public String getName() {

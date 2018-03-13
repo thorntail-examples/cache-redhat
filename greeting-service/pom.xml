@@ -16,25 +16,7 @@
 
   <name>WildFly Swarm - Cache Booster - Greeting Service</name>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>bom-all</artifactId>
-        <version>${version.wildfly.swarm}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <dependencies>
-    <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <version>7.0</version>
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>jaxrs</artifactId>
@@ -44,9 +26,13 @@
       <artifactId>cdi</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>monitor</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.infinispan</groupId>
       <artifactId>infinispan-client-hotrod</artifactId>
-      <version>8.2.8.Final</version>
+      <version>${version.infinispan}</version>
     </dependency>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
@@ -80,13 +66,6 @@
                   <exclude>webapp</exclude>
                 </excludes>
               </generator>
-              <enricher>
-                <config>
-                  <wildfly-swarm-health-check>
-                    <path>/api/alive</path>
-                  </wildfly-swarm-health-check>
-                </config>
-              </enricher>
             </configuration>
           </plugin>
         </plugins>

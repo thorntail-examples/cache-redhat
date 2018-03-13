@@ -41,10 +41,10 @@ public class NameCache {
 
     @Inject
     @ConfigurationValue("infinispan.host")
-    private String infispanHost;
+    private String infinispanHost;
     @Inject
     @ConfigurationValue("infinispan.port")
-    private String infispanPort;
+    private int infinispanPort;
 
     private RemoteCache<String, String> cache;
 
@@ -54,11 +54,11 @@ public class NameCache {
         configurationBuilder.tcpNoDelay(true)
                 .connectionPool()
                 .addServer()
-                .host(infispanHost)
-                .port(Integer.valueOf(infispanPort));
+                .host(infinispanHost)
+                .port(Integer.valueOf(infinispanPort));
         RemoteCacheManager cacheManager = new RemoteCacheManager(configurationBuilder.build());
         cache = cacheManager.getCache();
-        log.debugv("configured cache %s:%s", infispanHost, infispanPort);
+        log.debugv("configured cache %s:%d", infinispanHost, infinispanPort);
     }
 
     public void put(String name) {

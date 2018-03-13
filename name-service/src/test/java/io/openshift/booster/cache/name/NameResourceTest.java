@@ -17,18 +17,16 @@
  */
 package io.openshift.booster.cache.name;
 
-import com.jayway.restassured.response.Response;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.wildfly.swarm.arquillian.DefaultDeployment;
 
-import static com.jayway.restassured.RestAssured.when;
-import static org.junit.Assert.assertTrue;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.Matchers.notNullValue;
 
 /**
- *
  * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
  * <br>
  * Date: 2/9/18
@@ -37,22 +35,17 @@ import static org.junit.Assert.assertTrue;
 @DefaultDeployment
 public class NameResourceTest {
 
-    private static final String EXPECTED_RESULT = "\\{\"name\":\".*\"}";
     private static final String BASE_URI = "http://localhost:8080";
 
     @Test
     @RunAsClient
     public void testGetName() {
-        Response response = when().get(BASE_URI + "/api/name");
-        response.then().assertThat().statusCode(200);
-        String result = responseAsString(response);
-        assertTrue("Actual response '" + result + "' didn't match the expected expression: '" + EXPECTED_RESULT,
-                result.matches(EXPECTED_RESULT));
-    }
-
-    private String responseAsString(Response response) {
-        String result = response.getBody().print();
-        result = result.replaceAll("\\s", "");
-        return result;
+        // @formatter:off
+        when()
+                .get(BASE_URI + "/api/name")
+        .then()
+                .statusCode(200)
+                .body("name", notNullValue());
+        // @formatter:on
     }
 }
