@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit;
 public class NameCache {
 
     private static final Logger log = Logger.getLogger(NameCache.class);
-    private static final String KEY = "name";
+    private static final String KEY = "cute-name";
 
     @Inject
     @ConfigurationValue("infinispan.host")
