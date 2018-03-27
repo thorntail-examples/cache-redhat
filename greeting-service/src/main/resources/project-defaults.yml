@@ -1,5 +1,5 @@
-name-service:
-  url: "http://wfswarm-cache-name:8080/api"
+cute-name-service:
+  url: "http://wfswarm-cache-cute-name:8080/api"
 infinispan:
   host: cache-server
   port: 11222

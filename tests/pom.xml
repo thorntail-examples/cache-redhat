@@ -33,7 +33,7 @@
 
     <dependency>
       <groupId>io.openshift.booster</groupId>
-      <artifactId>wfswarm-cache-name</artifactId>
+      <artifactId>wfswarm-cache-cute-name</artifactId>
       <version>${project.version}</version>
       <classifier>classes</classifier>
     </dependency>
@@ -105,7 +105,7 @@
                   <outputDirectory>${project.build.directory}</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>${project.parent.basedir}/name-service/target</directory>
+                      <directory>${project.parent.basedir}/cute-name-service/target</directory>
                       <includes>
                         <include>*-is.yml</include>
                       </includes>

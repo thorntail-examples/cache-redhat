@@ -19,16 +19,20 @@ package io.openshift.booster;
 
 import org.arquillian.cube.openshift.impl.enricher.AwaitRoute;
 import org.arquillian.cube.openshift.impl.enricher.RouteURL;
-import org.hamcrest.Matchers;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.when;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -38,7 +42,7 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(Arquillian.class)
 public class OpenshiftIT {
-    private static final String NAME_SERVICE_APP = "wfswarm-cache-name";
+    private static final String NAME_SERVICE_APP = "wfswarm-cache-cute-name";
     private static final String GREETING_SERVICE_APP = "wfswarm-cache-greeting";
 
     @RouteURL(NAME_SERVICE_APP)
@@ -55,23 +59,47 @@ public class OpenshiftIT {
     }
 
     @Test
-    public void shouldWorkSlowOnFirstQuery() {
-        long time = measureTime(this::getGreeting);
+    public void greetingShouldBeCached() {
+        String first = getGreeting();
+        String second = getGreeting();
 
-        assertThat("Server responded too fast, expected at least 2000 ms, got response in " + time,
-                time,
-                greaterThanOrEqualTo(2000L));
+        assertThat(first, is(second));
     }
 
     @Test
-    public void shouldWorkFastOnConsecutiveQuery() {
+    public void greetingShouldChangeAfterCacheClear() {
+        String first = getGreeting();
+        clearCache();
+        String second = getGreeting();
+
+        assertThat(first, is(not(second)));
+    }
+
+    @Test
+    public void cacheShouldExpire() throws InterruptedException {
+        String first = getGreeting();
+        TimeUnit.SECONDS.sleep(11); // wait for cache expiration, default TTL is 10 seconds
+        String second = getGreeting();
+
+        assertThat(first, is(not(second)));
+    }
+
+    @Test
+    public void firstRequestShouldBeSlow() {
+        long time = measureTime(this::getGreeting);
+
+        assertThat("Server responded too fast, expected at least 2000 ms, got response in " + time,
+                time, greaterThanOrEqualTo(2000L));
+    }
+
+    @Test
+    public void secondRequestShouldBeFast() {
         getGreeting();
 
         long time = measureTime(this::getGreeting);
 
         assertThat("Server didn't respond fast enough. Expecting response in 1000 ms, got in " + time,
-                time,
-                lessThanOrEqualTo(1000L));
+                time, lessThanOrEqualTo(1000L));
     }
 
     @Test
@@ -88,15 +116,20 @@ public class OpenshiftIT {
         when()
                 .get(greetingServiceUrl + "api/cached")
         .then()
-                .body("cached", Matchers.is(cached));
+                .body("cached", is(cached));
     }
 
-    private void getGreeting() {
-        when()
-                .get(greetingServiceUrl + "api/greeting")
-        .then()
-                .statusCode(200)
-                .body("message", startsWith("hello"));
+    private String getGreeting() {
+        String greeting =
+                when()
+                        .get(greetingServiceUrl + "api/greeting")
+                .then()
+                        .statusCode(200)
+                        .body("message", startsWith("hello"))
+                .extract()
+                        .jsonPath()
+                        .get("message");
+        return greeting;
     }
 
     private void clearCache() {
