@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Cache Mission</title>
+    <title>Cache Mission - WildFly Swarm</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -13,29 +13,56 @@
 </head>
 <body>
 <div class="container">
-    <h1>Cache Mission</h1>
-    <div class="col-md-4">
-        <h3>Query the service</h3>
-        <button onclick="greet()" class="btn btn-success">Greet</button>
-        <div class="requestInProgress" style="display: none;">Performing the request...</div>
-        <div class="result" style="display: none;">
-            <div class="row">
-                <label>Response: </label>
-                <span id="greeting"></span>
+    <div>
+        <h1>Cache Mission - WildFly Swarm</h1>
+
+        <p class="lead">
+            This mission demonstrates how to use a cache to reduce the response time of applications.
+        </p>
+
+        <p class="lead">
+            When invoked, the Greeting Service calls the Cute Name Service and caches its response to speed up
+            handling of the consecutive requests. The cache expires in 5 seconds.
+        </p>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="well">
+                    Request a greeting from the Greeting Service.
+                    <br/>
+                    If the value is not cached, the request should be handled in approximately 2 seconds.
+                    If it is, it should be significantly faster
+                </div>
+                <button onclick="greet()" class="btn btn-success" style="margin-bottom: 2em;">Query the Service</button>
+                <div class="requestInProgress" style="display: none;">Performing the request...</div>
+                <div class="result" style="display: none; margin-top: 2em">
+                    <div class="row">
+                        <label>Response: </label>
+                        <span id="greeting"></span>
+                    </div>
+                    <div class="row">
+                        <label>Response time: </label>
+                        <span id="responseTime"></span> ms
+                    </div>
+                </div>
             </div>
-            <div class="row">
-                <label>Response time: </label>
-                <span id="responseTime"></span>
+
+            <div class="col-md-4">
+                <div class="well">
+                    Hitting the button below will result in emptying the cache.
+                </div>
+                <button onclick="clearCache()" class="btn btn-danger">Clear the cache</button>
+            </div>
+
+            <div class="col-md-4">
+                <div class="well">
+                    State of the cache. If the cache is filled, the Greeting Service will respond faster.
+                </div>
+                <strong>
+                    <mark><span class="strong" id="state"></span></mark>
+                </strong>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <h3>Clear the cache</h3>
-        <button onclick="clearCache()" class="btn btn-danger">Clear</button>
-    </div>
-    <div class="col-md-4">
-        <h3>Cache state</h3>
-        <span id="state"></span>
     </div>
 </div>
 </body>

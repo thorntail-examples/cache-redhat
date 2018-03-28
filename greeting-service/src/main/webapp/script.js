@@ -4,7 +4,7 @@ setInterval(function() {
         type: 'GET',
         dataType: 'json',
         success: function(result) {
-            $('#state').text(result.cached ? "Cached" : "Not cached")
+            $('#state').text(result.cached ? "Filled" : "Empty")
         }
     })
 }, 100); // every 100 ms
