@@ -12,10 +12,10 @@
 
   <groupId>io.openshift.booster</groupId>
   <artifactId>wfswarm-cache-booster</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>7.1.0-redhat-1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <version.wildfly.swarm>2018.3.3</version.wildfly.swarm>
+    <version.wildfly.swarm>7.1.0.redhat-33</version.wildfly.swarm>
     <version.infinispan>8.2.8.Final</version.infinispan>
     <version.resteasy>3.0.24.Final</version.resteasy>
     <version.restassured>3.0.7</version.restassured>
@@ -35,6 +35,13 @@
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>bom</artifactId>
+        <version>${version.wildfly.swarm}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>bom-certified</artifactId>
         <version>${version.wildfly.swarm}</version>
         <type>pom</type>
         <scope>import</scope>

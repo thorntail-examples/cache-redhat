@@ -15,7 +15,7 @@
   <parent>
     <groupId>io.openshift.booster</groupId>
     <artifactId>wfswarm-cache-booster</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>7.1.0-redhat-1-SNAPSHOT</version>
   </parent>
 
   <artifactId>wfswarm-cache-tests</artifactId>
