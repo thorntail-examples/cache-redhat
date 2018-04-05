@@ -7,4 +7,4 @@ To deploy to OpenShift, use `mvn fabric8:deploy -Popenshift` or run
  
  
 The greeting-service requires a running JDG server. In OpenShift, you 
-can create one with `oc create -f greeting-service/.openshift/cacheserver.yaml`.
+can create one with `oc apply -f service.cache.yml`.
