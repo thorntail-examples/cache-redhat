@@ -15,7 +15,7 @@
   <version>7.1.0-redhat-1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <version.wildfly.swarm>7.1.0.redhat-47</version.wildfly.swarm>
+    <version.wildfly.swarm>7.1.0.redhat-57</version.wildfly.swarm>
     <version.infinispan>8.2.8.Final</version.infinispan>
     <version.resteasy>3.0.24.Final</version.resteasy>
     <version.restassured>3.0.7</version.restassured>
