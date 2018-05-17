@@ -78,7 +78,7 @@ public class OpenshiftIT {
     @Test
     public void cacheShouldExpire() throws InterruptedException {
         String first = getGreeting();
-        TimeUnit.SECONDS.sleep(11); // wait for cache expiration, default TTL is 10 seconds
+        TimeUnit.SECONDS.sleep(6); // wait for expiration, TTL of the cute name cache entry is 5 seconds
         String second = getGreeting();
 
         assertThat(first, is(not(second)));
