@@ -54,7 +54,7 @@ public class GreetingResource {
             name = nameService.getName();
             cache.put(name);
         }
-        return new Message(String.format("hello %s", name));
+        return new Message(String.format("Hello %s", name));
     }
 
     @GET

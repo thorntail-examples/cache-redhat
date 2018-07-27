@@ -125,7 +125,7 @@ public class OpenshiftIT {
                         .get(greetingServiceUrl + "api/greeting")
                 .then()
                         .statusCode(200)
-                        .body("message", startsWith("hello"))
+                        .body("message", startsWith("Hello"))
                 .extract()
                         .jsonPath()
                         .get("message");
