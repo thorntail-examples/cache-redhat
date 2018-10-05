@@ -42,8 +42,8 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(Arquillian.class)
 public class OpenshiftIT {
-    private static final String NAME_SERVICE_APP = "wfswarm-cache-cute-name";
-    private static final String GREETING_SERVICE_APP = "wfswarm-cache-greeting";
+    private static final String NAME_SERVICE_APP = "thorntail-cache-cute-name";
+    private static final String GREETING_SERVICE_APP = "thorntail-cache-greeting";
 
     @RouteURL(NAME_SERVICE_APP)
     @AwaitRoute(statusCode = {200, 204}, path = "/health")

@@ -1,5 +1,5 @@
 cute-name-service:
-  url: "http://wfswarm-cache-cute-name:8080/api"
+  url: "http://thorntail-cache-cute-name:8080/api"
 infinispan:
   host: cache-server
   port: 11222

@@ -14,14 +14,14 @@
 
   <parent>
     <groupId>io.openshift.booster</groupId>
-    <artifactId>wfswarm-cache-booster</artifactId>
-    <version>7.1.0-redhat-3-SNAPSHOT</version>
+    <artifactId>thorntail-cache-booster</artifactId>
+    <version>2.2.0-redhat-1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>wfswarm-cache-tests</artifactId>
+  <artifactId>thorntail-cache-tests</artifactId>
   <packaging>jar</packaging>
 
-  <name>WildFly Swarm - Cache - Tests</name>
+  <name>Thorntail - Cache - Tests</name>
 
   <dependencies>
     <dependency>
@@ -33,14 +33,14 @@
 
     <dependency>
       <groupId>io.openshift.booster</groupId>
-      <artifactId>wfswarm-cache-cute-name</artifactId>
+      <artifactId>thorntail-cache-cute-name</artifactId>
       <version>${project.version}</version>
       <classifier>classes</classifier>
     </dependency>
 
     <dependency>
       <groupId>io.openshift.booster</groupId>
-      <artifactId>wfswarm-cache-greeting</artifactId>
+      <artifactId>thorntail-cache-greeting</artifactId>
       <version>${project.version}</version>
       <classifier>classes</classifier>
     </dependency>
@@ -64,7 +64,7 @@
     </dependency>
 
     <dependency>
-      <groupId>org.wildfly.swarm</groupId>
+      <groupId>io.thorntail</groupId>
       <artifactId>arquillian</artifactId>
       <scope>test</scope>
     </dependency>
