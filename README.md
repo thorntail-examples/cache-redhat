@@ -1,4 +1,4 @@
-# wfswarm-cache-mission
+# thorntail-cache-mission
 
 To run locally, run the generated jars with `-Dswarm.project.stage=local`
 

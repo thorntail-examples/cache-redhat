@@ -7,15 +7,15 @@
   <parent>
     <groupId>io.openshift</groupId>
     <artifactId>booster-parent</artifactId>
-    <version>20</version>
+    <version>23</version>
   </parent>
 
   <groupId>io.openshift.booster</groupId>
-  <artifactId>wfswarm-cache-booster</artifactId>
-  <version>7.1.0-redhat-3-SNAPSHOT</version>
+  <artifactId>thorntail-cache-booster</artifactId>
+  <version>2.2.0-redhat-1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <version.wildfly.swarm>7.1.0.redhat-77</version.wildfly.swarm>
+    <version.thorntail>2.2.0.Final-redhat-00021</version.thorntail>
     <version.infinispan>8.2.8.Final</version.infinispan>
     <version.resteasy>3.0.24.Final</version.resteasy>
     <version.restassured>3.0.7</version.restassured>
@@ -33,29 +33,28 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.wildfly.swarm</groupId>
+        <groupId>io.thorntail</groupId>
         <artifactId>bom</artifactId>
-        <version>${version.wildfly.swarm}</version>
+        <version>${version.thorntail}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>org.wildfly.swarm</groupId>
+        <groupId>io.thorntail</groupId>
         <artifactId>bom-certified</artifactId>
-        <version>${version.wildfly.swarm}</version>
+        <version>${version.thorntail}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-
     </dependencies>
   </dependencyManagement>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-plugin</artifactId>
-        <version>${version.wildfly.swarm}</version>
+        <groupId>io.thorntail</groupId>
+        <artifactId>thorntail-maven-plugin</artifactId>
+        <version>${version.thorntail}</version>
         <executions>
           <execution>
             <goals>
