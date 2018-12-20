@@ -16,7 +16,7 @@
   <packaging>pom</packaging>
   <properties>
     <version.thorntail>2.2.0.Final-redhat-00021</version.thorntail>
-    <version.infinispan>8.2.8.Final</version.infinispan>
+    <version.infinispan>9.4.5.Final</version.infinispan>
     <version.resteasy>3.0.24.Final</version.resteasy>
     <version.restassured>3.0.7</version.restassured>
     <version.junit>4.12</version.junit>
