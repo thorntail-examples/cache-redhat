@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster;
+package io.thorntail.example;
 
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
@@ -28,20 +28,16 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
- * <br>
- * Date: 1/31/18
- */
 @ApplicationScoped
 public class NameCache {
-
     private static final Logger log = Logger.getLogger(NameCache.class);
+
     private static final String KEY = "cute-name";
 
     @Inject
     @ConfigurationValue("infinispan.host")
     private String infinispanHost;
+
     @Inject
     @ConfigurationValue("infinispan.port")
     private int infinispanPort;

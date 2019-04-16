@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster;
+package io.thorntail.example;
 
 import org.arquillian.cube.openshift.impl.enricher.AwaitRoute;
 import org.arquillian.cube.openshift.impl.enricher.RouteURL;
@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import static io.restassured.RestAssured.when;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
@@ -35,23 +35,18 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 
-/**
- * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
- * <br>
- * Date: 3/9/18
- */
 @RunWith(Arquillian.class)
 public class OpenshiftIT {
     private static final String NAME_SERVICE_APP = "thorntail-cache-cute-name";
     private static final String GREETING_SERVICE_APP = "thorntail-cache-greeting";
 
     @RouteURL(NAME_SERVICE_APP)
-    @AwaitRoute(statusCode = {200, 204}, path = "/health")
-    private URL nameServiceUrl;
+    @AwaitRoute(path = "/health")
+    private String nameServiceUrl;
 
     @RouteURL(GREETING_SERVICE_APP)
-    @AwaitRoute(statusCode = {200, 204}, path = "/health")
-    private URL greetingServiceUrl;
+    @AwaitRoute(path = "/health")
+    private String greetingServiceUrl;
 
     @Before
     public void setup() {
@@ -98,7 +93,7 @@ public class OpenshiftIT {
 
         long time = measureTime(this::getGreeting);
 
-        assertThat("Server didn't respond fast enough. Expecting response in 1000 ms, got in " + time,
+        assertThat("Server didn't respond fast enough. Expecting response in at most 1000 ms, got in " + time,
                 time, lessThanOrEqualTo(1000L));
     }
 
@@ -111,34 +106,36 @@ public class OpenshiftIT {
         assertCached(false);
     }
 
-    // @formatter:off
     private void assertCached(boolean cached) {
-        when()
-                .get(greetingServiceUrl + "api/cached")
+        given()
+                .baseUri(greetingServiceUrl)
+        .when()
+                .get("/api/cached")
         .then()
                 .body("cached", is(cached));
     }
 
     private String getGreeting() {
         String greeting =
-                when()
-                        .get(greetingServiceUrl + "api/greeting")
+                given()
+                        .baseUri(greetingServiceUrl)
+                .when()
+                        .get("/api/greeting")
                 .then()
                         .statusCode(200)
                         .body("message", startsWith("Hello"))
-                .extract()
-                        .jsonPath()
-                        .get("message");
+                        .extract().jsonPath().get("message");
         return greeting;
     }
 
     private void clearCache() {
-        when()
-                .delete(greetingServiceUrl + "api/cached")
+        given()
+                .baseUri(greetingServiceUrl)
+        .when()
+                .delete("/api/cached")
         .then()
                 .statusCode(204);
     }
-    // @formatter:on
 
     private long measureTime(Runnable action) {
         long start = System.currentTimeMillis();

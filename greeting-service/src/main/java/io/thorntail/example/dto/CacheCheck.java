@@ -15,17 +15,16 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster;
+package io.thorntail.example.dto;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+public class CacheCheck {
+    private final boolean cached;
 
-/**
- * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
- * <br>
- * Date: 2/7/18
- */
-@ApplicationPath("/api")
-public class ApplicationConfig extends Application {
+    public CacheCheck(boolean cached) {
+        this.cached = cached;
+    }
 
+    public boolean isCached() {
+        return cached;
+    }
 }

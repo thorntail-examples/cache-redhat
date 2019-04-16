@@ -15,10 +15,10 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster;
+package io.thorntail.example;
 
-import io.openshift.booster.dto.CacheCheck;
-import io.openshift.booster.dto.Message;
+import io.thorntail.example.dto.CacheCheck;
+import io.thorntail.example.dto.Message;
 import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
@@ -28,15 +28,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-/**
- * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
- * <br>
- * Date: 1/31/18
- */
 @Path("/")
 @Produces("application/json")
 public class GreetingResource {
-
     private static final Logger log = Logger.getLogger(GreetingResource.class);
 
     @Inject
@@ -71,5 +65,4 @@ public class GreetingResource {
         cache.remove();
         return Response.status(Response.Status.NO_CONTENT).build();
     }
-
 }

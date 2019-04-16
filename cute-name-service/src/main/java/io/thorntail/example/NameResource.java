@@ -15,24 +15,18 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster;
+package io.thorntail.example;
 
-import io.openshift.booster.dto.NameDto;
+import io.thorntail.example.dto.NameDto;
 import org.jboss.logging.Logger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-/**
- * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
- * <br>
- * Date: 1/31/18
- */
 @Path("/name")
 @Produces("application/json")
 public class NameResource {
-
     private static final Logger log = Logger.getLogger(NameResource.class);
 
     @GET
@@ -48,5 +42,4 @@ public class NameResource {
         } catch (InterruptedException ignored) {
         }
     }
-
 }
