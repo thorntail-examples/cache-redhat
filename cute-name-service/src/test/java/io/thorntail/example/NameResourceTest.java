@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster;
+package io.thorntail.example;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -23,29 +23,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.wildfly.swarm.arquillian.DefaultDeployment;
 
-import static io.restassured.RestAssured.when;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
-/**
- * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
- * <br>
- * Date: 2/9/18
- */
 @RunWith(Arquillian.class)
 @DefaultDeployment
 public class NameResourceTest {
-
     private static final String BASE_URI = "http://localhost:8080";
 
     @Test
     @RunAsClient
     public void testGetName() {
-        // @formatter:off
-        when()
-                .get(BASE_URI + "/api/name")
+        given()
+                .baseUri(BASE_URI)
+        .when()
+                .get("/api/name")
         .then()
                 .statusCode(200)
                 .body("name", notNullValue());
-        // @formatter:on
     }
 }

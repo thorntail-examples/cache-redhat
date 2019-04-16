@@ -15,22 +15,16 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster.dto;
+package io.thorntail.example.dto;
 
-/**
- *
- * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
- * <br>
- * Date: 2/9/18
- */
-public class NameDto {
-    private final String name;
+public class Message {
+    private final String message;
 
-    public NameDto(String name) {
-        this.name = name;
+    public Message(String message) {
+        this.message = message;
     }
 
-    public String getName() {
-        return name;
+    public String getMessage() {
+        return message;
     }
 }

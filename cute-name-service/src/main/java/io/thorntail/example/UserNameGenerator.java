@@ -15,18 +15,12 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster;
+package io.thorntail.example;
 
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Generates names.
- *
- * @author <a href="http://escoffier.me">Clement Escoffier</a>
- */
 public class UserNameGenerator {
-
     private static final Set<String> used = new HashSet<>();
 
     public static String generate() {

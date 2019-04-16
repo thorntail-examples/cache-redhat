@@ -6,14 +6,14 @@ metadata:
     iconClass: icon-jboss
     tags: thorntail, java, microservice
     template.openshift.io/provider-display-name: "Red Hat, Inc."
-    template.openshift.io/documentation-url: "http://appdev.prod-preview.openshift.io/docs/wf-swarm-runtime.html#mission-cache-wf-swarm"
+    template.openshift.io/documentation-url: "https://launcher.fabric8.io/docs/thorntail-runtime.html#mission-cache-wf-swarm"
     description: >-
-      The Cache Service Mission demonstrates caching with Infinispan.
+      The Cache mission demonstrates how to use a cache to increase the response time of applications.
 parameters:
 - name: SOURCE_REPOSITORY_URL
   description: The source URL for the application
   displayName: Source URL
-  value: https://github.com/wildfly-swarm-openshiftio-boosters/wfswarm-cache.git
+  value: https://github.com/thorntail-examples/cache-redhat.git
   required: true
 - name: SOURCE_REPOSITORY_REF
   description: The branch name for the application
@@ -93,7 +93,7 @@ objects:
     labels:
       expose: "true"
       app: thorntail-cache-cute-name
-      group: io.openshift.booster
+      group: io.thorntail.example
     name: thorntail-cache-cute-name
   spec:
     ports:
@@ -103,20 +103,20 @@ objects:
       targetPort: 8080
     selector:
       app: thorntail-cache-cute-name
-      group: io.openshift.booster
+      group: io.thorntail.example
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     labels:
       app: thorntail-cache-cute-name
-      group: io.openshift.booster
+      group: io.thorntail.example
     name: thorntail-cache-cute-name
   spec:
     replicas: 1
     revisionHistoryLimit: 2
     selector:
       app: thorntail-cache-cute-name
-      group: io.openshift.booster
+      group: io.thorntail.example
     strategy:
       rollingParams:
         timeoutSeconds: 3600
@@ -125,7 +125,7 @@ objects:
       metadata:
         labels:
           app: thorntail-cache-cute-name
-          group: io.openshift.booster
+          group: io.thorntail.example
       spec:
         containers:
         - env:
@@ -163,7 +163,7 @@ objects:
   metadata:
     labels:
       app: thorntail-cache-cute-name
-      group: io.openshift.booster
+      group: io.thorntail.example
     name: thorntail-cache-cute-name
   spec:
     port:

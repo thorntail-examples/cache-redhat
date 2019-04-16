@@ -15,7 +15,7 @@
  *  limitations under the License.
  *
  */
-package io.openshift.booster;
+package io.thorntail.example;
 
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
@@ -25,14 +25,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-/**
- * @author Michal Szynkiewicz, michal.l.szynkiewicz@gmail.com
- * <br>
- * Date: 3/12/18
- */
 @ApplicationScoped
 public class NameService {
-
     @Inject
     @ConfigurationValue("cute-name-service.url")
     private String nameServiceUrl;
