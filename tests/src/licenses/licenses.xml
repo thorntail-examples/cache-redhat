@@ -1097,7 +1097,7 @@
     <dependency>
       <groupId>io.thorntail.example</groupId>
       <artifactId>thorntail-cache-cute-name</artifactId>
-      <version>2.4.0-redhat-1</version>
+      <version>2.4.0-redhat-2</version>
       <licenses>
         <license>
           <name>Apache Software License, Version 2.0</name>
@@ -1108,7 +1108,7 @@
     <dependency>
       <groupId>io.thorntail.example</groupId>
       <artifactId>thorntail-cache-greeting</artifactId>
-      <version>2.4.0-redhat-1</version>
+      <version>2.4.0-redhat-2</version>
       <licenses>
         <license>
           <name>Apache Software License, Version 2.0</name>
@@ -1119,7 +1119,7 @@
     <dependency>
       <groupId>io.thorntail.example</groupId>
       <artifactId>thorntail-cache-parent</artifactId>
-      <version>2.4.0-redhat-1</version>
+      <version>2.4.0-redhat-2</version>
       <licenses>
         <license>
           <name>Apache Software License, Version 2.0</name>
@@ -1130,7 +1130,7 @@
     <dependency>
       <groupId>io.thorntail.example</groupId>
       <artifactId>thorntail-cache-tests</artifactId>
-      <version>2.4.0-redhat-1</version>
+      <version>2.4.0-redhat-2</version>
       <licenses>
         <license>
           <name>Apache Software License, Version 2.0</name>
