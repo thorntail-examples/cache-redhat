@@ -21,7 +21,19 @@ items:
       spec:
         containers:
         - name: cache-server
-          image: registry.access.redhat.com/jboss-datagrid-7/datagrid73-openshift:1.0
+          image: registry.access.redhat.com/jboss-datagrid-7/datagrid73-openshift:1.3
+          livenessProbe:
+            exec:
+              command:
+              - "/bin/bash"
+              - "-c"
+              - "/opt/datagrid/bin/livenessProbe.sh"
+          readinessProbe:
+            exec:
+              command:
+              - "/bin/bash"
+              - "-c"
+              - "/opt/datagrid/bin/readinessProbe.sh"
           env:
           - name: DEFAULT_CACHE_EXPIRATION_LIFESPAN
             value: "10000"
