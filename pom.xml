@@ -21,7 +21,7 @@
 
   <groupId>io.thorntail.example</groupId>
   <artifactId>thorntail-cache-parent</artifactId>
-  <version>2.5.1-redhat-3</version>
+  <version>2.5.1-redhat-4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Thorntail - Cache</name>
