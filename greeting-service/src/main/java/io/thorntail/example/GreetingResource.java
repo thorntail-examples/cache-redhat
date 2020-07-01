@@ -54,7 +54,7 @@ public class GreetingResource {
     @GET
     @Path("cached")
     public CacheCheck isCached() {
-        log.debug("checking if the value is cached");
+        log.info("checking if the value is cached");
         return new CacheCheck(cache.hasValue());
     }
 
