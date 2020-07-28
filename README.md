@@ -22,7 +22,7 @@ Run the following commands to configure and deploy the applications.
 ### Deployment using S2I
 
 ```bash
-oc apply -f ./greeting-service/.openshiftio/service.cache.yaml
+oc apply -f ./greeting-service/.openshiftio/service.cache.yml
 
 oc apply -f ./greeting-service/.openshiftio/application.yaml
 oc new-app --template=thorntail-cache-greeting
