@@ -17,38 +17,36 @@
  */
 package io.thorntail.example;
 
-import org.arquillian.cube.openshift.impl.enricher.AwaitRoute;
-import org.arquillian.cube.openshift.impl.enricher.RouteURL;
-import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import io.thorntail.openshift.test.AdditionalResources;
+import io.thorntail.openshift.test.OpenShiftTest;
+import io.thorntail.openshift.test.injection.TestResource;
+import io.thorntail.openshift.test.injection.WithName;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
-import static org.junit.Assert.assertThat;
 
-@RunWith(Arquillian.class)
+@OpenShiftTest
+@AdditionalResources("classpath:test-cache.yml")
 public class OpenshiftIT {
     private static final String NAME_SERVICE_APP = "thorntail-cache-cute-name";
     private static final String GREETING_SERVICE_APP = "thorntail-cache-greeting";
 
-    @RouteURL(NAME_SERVICE_APP)
-    @AwaitRoute(path = "/health")
-    private String nameServiceUrl;
+    @TestResource
+    @WithName(NAME_SERVICE_APP)
+    private URL nameServiceUrl;
 
-    @RouteURL(GREETING_SERVICE_APP)
-    @AwaitRoute(path = "/health")
-    private String greetingServiceUrl;
+    @TestResource
+    @WithName(GREETING_SERVICE_APP)
+    private URL greetingServiceUrl;
 
-    @Before
+    @BeforeEach
     public void setup() {
         clearCache();
     }
@@ -58,7 +56,7 @@ public class OpenshiftIT {
         String first = getGreeting();
         String second = getGreeting();
 
-        assertThat(first, is(second));
+        assertThat(first).isEqualTo(second);
     }
 
     @Test
@@ -67,7 +65,7 @@ public class OpenshiftIT {
         clearCache();
         String second = getGreeting();
 
-        assertThat(first, is(not(second)));
+        assertThat(first).isNotEqualTo(second);
     }
 
     @Test
@@ -76,15 +74,16 @@ public class OpenshiftIT {
         TimeUnit.SECONDS.sleep(6); // wait for expiration, TTL of the cute name cache entry is 5 seconds
         String second = getGreeting();
 
-        assertThat(first, is(not(second)));
+        assertThat(first).isNotEqualTo(second);
     }
 
     @Test
     public void firstRequestShouldBeSlow() {
         long time = measureTime(this::getGreeting);
 
-        assertThat("Server responded too fast, expected at least 2000 ms, got response in " + time,
-                time, greaterThanOrEqualTo(2000L));
+        assertThat(time)
+                .as("Server responded too fast, expected at least 2000 ms, got response in " + time)
+                .isGreaterThanOrEqualTo(2000L);
     }
 
     @Test
@@ -93,8 +92,9 @@ public class OpenshiftIT {
 
         long time = measureTime(this::getGreeting);
 
-        assertThat("Server didn't respond fast enough. Expecting response in at most 1000 ms, got in " + time,
-                time, lessThanOrEqualTo(1000L));
+        assertThat(time)
+                .as("Server didn't respond fast enough. Expecting response in at most 1000 ms, got in " + time)
+                .isLessThanOrEqualTo(1000L);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class OpenshiftIT {
 
     private void assertCached(boolean cached) {
         given()
-                .baseUri(greetingServiceUrl)
+                .baseUri(greetingServiceUrl.toString())
         .when()
                 .get("/api/cached")
         .then()
@@ -118,7 +118,7 @@ public class OpenshiftIT {
     private String getGreeting() {
         String greeting =
                 given()
-                        .baseUri(greetingServiceUrl)
+                        .baseUri(greetingServiceUrl.toString())
                 .when()
                         .get("/api/greeting")
                 .then()
@@ -130,7 +130,7 @@ public class OpenshiftIT {
 
     private void clearCache() {
         given()
-                .baseUri(greetingServiceUrl)
+                .baseUri(greetingServiceUrl.toString())
         .when()
                 .delete("/api/cached")
         .then()
