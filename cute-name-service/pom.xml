@@ -73,6 +73,15 @@
                 </goals>
               </execution>
             </executions>
+            <configuration>
+              <enricher>
+                <config>
+                  <jkube-healthcheck-thorntail-v2>
+                    <path>/api/health</path>
+                  </jkube-healthcheck-thorntail-v2>
+                </config>
+              </enricher>
+            </configuration>
           </plugin>
         </plugins>
       </build>
