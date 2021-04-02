@@ -39,7 +39,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <version.jkube>1.1.1</version.jkube>
+    <version.jkube>1.2.0</version.jkube>
     <version.infinispan>9.4.19.Final-redhat-00001</version.infinispan> <!-- matches the version of remote Infinispan server -->
     <version.maven-resources-plugin>3.2.0</version.maven-resources-plugin>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
