@@ -1,0 +1,11 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: org.infinispan:infinispan-client-hotrod
+    versions:
+    - "> 9.4.19.Final-redhat-00001"
